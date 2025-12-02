@@ -1,0 +1,728 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", Arial, sans-serif;
+    background: radial-gradient(circle at center, #0f0f1a 40%, #070710 100%);
+    color: #fff;
+    overflow-x: hidden;
+}
+
+
+#main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(15, 15, 26, 0.15);
+    backdrop-filter: blur(12px);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* overflow: hidden;  ❌ احذف أو علّق السطر ده */
+    overflow: visible; /* ✅ خليه كده */
+}
+
+
+#main-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -200px;
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    animation: glowLine 3s linear infinite;
+}
+
+@keyframes glowLine {
+    0% {
+        left: -200px;
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    50% {
+        left: 50%;
+        opacity: 1;
+    }
+
+    100% {
+        left: 110%;
+        opacity: 0;
+    }
+}
+
+.navbar {
+    width: 90%;
+    height: 80px;
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    position: relative;
+}
+
+.logo img {
+    width: 65px;
+    height: auto;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 10px;
+}
+
+nav {
+    margin-left: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+/* Reduce gap between sign-in and sign-out buttons */
+nav ul li:has(.sign-btn) + li:has(.signout-btn),
+nav ul li:has(.signout-btn) + li:has(.sign-btn) {
+    margin-left: -20px;
+}
+
+/* Group auth buttons together - reduce gap between them */
+nav ul li.auth-group + li.auth-group {
+    margin-left: -25px;
+}
+
+/* Reduce gap between last auth button and shop dropdown */
+nav ul li.auth-group:last-of-type ~ li.dropdown,
+nav ul li.auth-group:last-of-type + li.dropdown {
+    margin-left: -20px;
+}
+
+nav ul li {
+    position: relative;
+}
+
+/* الزرار العادي */
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.05em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 212, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.15);
+}
+
+nav ul li a:hover {
+    color: #00d4ff;
+    background-color: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+/* زرار Sign In مختلف */
+.sign-btn {
+    background: linear-gradient(90deg, #00d4ff, #0084ff);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.sign-btn:hover {
+    background: linear-gradient(90deg, #00e5ff, #00aaff);
+    box-shadow: 0 0 35px rgba(0, 212, 255, 0.8);
+}
+
+/* Sign Out button - matches Sign In styling exactly */
+.signout-btn {
+    background: linear-gradient(90deg, #00d4ff, #0084ff);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.signout-btn:hover {
+    background: linear-gradient(90deg, #00e5ff, #00aaff);
+    box-shadow: 0 0 35px rgba(0, 212, 255, 0.8);
+}
+/* ============================= */
+/* ====== القائمة المنسدلة ====== */
+/* ============================= */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 120%; /* تنزل تحت الزر شوية */
+    right: 0;
+    min-width: 180px;
+    background: rgba(15, 20, 35, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.35s ease;
+    z-index: 2000;
+}
+
+/* عند المرور على الزر أو على القائمة نفسها */
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* الروابط داخل القائمة */
+.dropdown-content a {
+    display: block;
+    padding: 12px 20px;
+    color: #fff;
+    font-size: 0.95em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.dropdown-content a:hover {
+    background: rgba(0, 212, 255, 0.15);
+    color: #00d4ff;
+    padding-right: 25px;
+}
+
+
+/* ========================= */
+/* ====== الخلفية ========= */
+/* ========================= */
+#hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+/* ✨ اللوجو المتوهّج */
+.glow-logo {
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+    text-align: center;
+}
+
+.glow-logo img {
+    width: 320px;
+    height: auto;
+    filter: drop-shadow(0 0 20px #00d4ff) brightness(1.2);
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* زرار Sign Up تحت اللوجو */
+.signup-btn {
+    margin-top: 40px;
+}
+
+.signup-btn a {
+    display: inline-block;
+    background: linear-gradient(90deg, #00d4ff, #0084ff);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.signup-btn a:hover {
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.7);
+    background: linear-gradient(90deg, #00e5ff, #00aaff);
+}
+
+/* حركة التوهّج */
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 20px #00d4ff) brightness(1.2);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 45px #00d4ff) brightness(1.5);
+    }
+}
+
+/* حركة عائمة بسيطة */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ✨ خلفية مجرّية متحركة */
+#hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    animation: galaxy 10s infinite linear;
+    z-index: -1;
+}
+
+@keyframes galaxy {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 0.6;
+    }
+}
+
+#cards-section {
+    padding: 100px 10%;
+    text-align: center;
+    background: radial-gradient(circle at center, #0f0f1a 30%, #06060c 100%);
+    position: relative;
+}
+
+#cards-section h2 {
+    font-size: 2.2em;
+    color: #00d4ff;
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+}
+
+.cards-container,
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 40px;
+    text-align: center;
+    justify-content: center;
+}
+
+/* Shop section headings for unified styling */
+.shop-section {
+    padding: 100px 10%;
+}
+.section-title {
+    font-size: 2.2em;
+    color: #00d4ff;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.676);
+    border-radius: 15px;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.15);
+    transition: all 0.4s ease;
+    backdrop-filter: blur(6px);
+    padding-bottom: 25px;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+}
+
+.cds-page .card img {
+    aspect-ratio: 1 / 1;
+    height: auto;
+}
+
+.cds-page .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+
+.card h3 {
+    margin: 20px 0 10px;
+    font-size: 1.3em;
+    color: #00e5ff;
+}
+
+.card p {
+    font-size: 0.95em;
+    color: #ccc;
+    padding: 0 15px;
+    min-height: 60px;
+}
+
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 24px;
+    background: linear-gradient(90deg, #00d4ff, #0084ff);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+    background: linear-gradient(90deg, #00e5ff, #00aaff);
+}
+/* ============================= */
+/* ====== What’s Special Section ====== */
+/* ============================= */
+
+.special-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 20px;
+}
+
+.special-card {
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 50px 60px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+}
+
+.special-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);
+}
+
+.special-card h2 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #00d4ff;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.special-card p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #e5e5e5;
+}
+
+.special-card strong {
+    color: #00d4ff;
+    font-weight: 600;
+}
+/* ========================= */
+/* ====== Footer Style ===== */
+/* ========================= */
+/* ========================= */
+/* ====== Footer Style ===== */
+/* ========================= */
+/* ===== FOOTER ===== */
+.footer {
+  width: 100%;
+  background: rgba(10, 15, 25, 0.5);
+  backdrop-filter: blur(20px);
+  color: #fff;
+  padding: 60px 10%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -5px 30px rgba(0, 255, 255, 0.1);
+  position: relative;
+  margin: 0;
+  border-radius: 16px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  align-items: flex-start;
+  direction: ltr;
+  text-align: left;
+}
+
+.footer-col h3 {
+  color: #00d9ff;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 12px rgba(0, 217, 255, 0.7);
+}
+
+
+.footer-col p,
+.footer-col a {
+  color: #d0d0d0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: #00d9ff;
+}
+
+.join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.join-btn svg {
+  width: 40px;
+  height: 40px;
+  fill: #00d9ff;
+  transition: all 0.3s ease;
+}
+
+.join-btn:hover svg {
+  fill: #00e5ff;
+  filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.8));
+  transform: scale(1.15);
+}
+
+
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* يخليها لازقة في آخر الصفحة بدون أي مسافة */
+footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #0a0f19; /* نفس خلفية الموقع */
+}
+
+/* LTR utility for English/numeric content inside RTL pages */
+.ltr {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+.ltr ul,
+.ltr ol {
+  margin: 0;
+  padding-left: 1.2em;
+}
+.cart-fab {
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  z-index: 1500;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 212, 255, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.25s ease;
+}
+.cart-fab:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0, 212, 255, 0.36); }
+.cart-fab svg { width: 20px; height: 20px; }
+.cart-badge {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  background: #ffffff;
+  color: #001;
+  border-radius: 50%;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: 700;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* ========================= */
+/* ===== Contact Page ===== */
+/* ========================= */
+
+.contact-hero {
+    text-align: center;
+    padding: 140px 20px 60px;
+}
+
+.contact-hero h1 {
+    font-size: 3em;
+    color: #00d4ff;
+    text-shadow: 0 0 18px rgba(0, 212, 255, 0.8);
+}
+
+.contact-hero p {
+    color: #ccc;
+    font-size: 1.1em;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px 10%;
+}
+
+.contact-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.contact-form,
+.contact-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.contact-form h2,
+.contact-info h2 {
+    font-size: 1.8em;
+    color: #00d4ff;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+.form-body label {
+    color: #eee;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.form-body input,
+.form-body textarea {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    font-size: 1em;
+    outline: none;
+}
+
+.form-body input:focus,
+.form-body textarea:focus {
+    border-color: #00d4ff;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+.form-body textarea {
+    min-height: 140px;
+    resize: none;
+}
+
+.send-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #00d4ff, #0084ff);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.7);
+    background: linear-gradient(90deg, #00e5ff, #00aaff);
+}
+
+.contact-info p {
+    color: #ddd;
+    font-size: 1.05em;
+    margin-bottom: 10px;
+}
+
+.contact-info strong {
+    color: #00d4ff;
+}
+
+.contact-info h3 {
+    margin-top: 20px;
+    color: #00d4ff;
+}
+.inline-cart-count {
+  display: inline-block;
+  margin-left: 8px;
+  background: #ffffff;
+  color: #001;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
