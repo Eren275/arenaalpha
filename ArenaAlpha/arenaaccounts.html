@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arena Alpha | Arena Accounts</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+  <header id="main-header">
+    <div class="navbar">
+      <div class="logo">
+        <a href="index.html"><img src="images/logo.png" alt="logo" /></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+
+          <li class="dropdown">
+            <a href="shop.html" class="dropbtn">Shop</a>
+            <div class="dropdown-content">
+
+              <a href="arenaaccounts.html">Arena accounts</a>
+              <a href="arenapoints.html">Arena points</a>
+              <a href="arenacd.html">Arena CD's</a>
+            </div>
+          </li>
+          <li><a href="contactus.html">Contact</a></li>
+          <li class="auth-group"><a href="signin.html" class="sign-btn">Sign In</a></li>
+          <li class="auth-group"><a href="#" class="signout-btn" style="display:none;">Sign Out</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <button id="cart-btn" aria-label="Open cart" title="Cart"
+        style="position:fixed;right:24px;top:20px;z-index:1500;background:#022125;border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.4);cursor:pointer;">
+        <span style="color:#001; font-weight:700;">🛒</span>
+        <span id="cart-count" class="cart-badge">0</span>
+    </button>
+
+  <section class="shop-section" style="padding-top:140px;">
+    <h2 class="section-title">Arena Accounts</h2>
+
+    <div class="card-container">
+      <!-- Products will be loaded from database -->
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col ltr">
+        <h3>Join Our Community</h3>
+        <p class="ltr">Be part of our growing gamers world — get updates, offers, and more.</p>
+        <br>
+        <a class="join-btn" href="https://t.me/+9Q6bmde_m7U0MzM0">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.328-.373-.115l-6.869 4.332-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.461c.54-.203 1.01.122.84.951z" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="footer-col ltr">
+        <h3>Contact</h3>
+        <p class="ltr">ahmedtarek27500@gmail.com</p>
+        <p class="ltr">+201124448051</p>
+        <p class="ltr">Cairo, Egypt</p>
+      </div>
+
+      <div class="footer-col ltr">
+        <h3>Our Services</h3>
+        <ul class="ltr">
+          <li>Game Accounts</li>
+          <li>Recharge & Top-up</li>
+          <li>Exclusive Offers</li>
+          <li>Support</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="ltr">© 2025 Arena Alpha. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+
+  <script src="modal.js"></script>
+  <script src="auth.js"></script>
+  <script src="products.js"></script>
+
+</body>
+
+</html>

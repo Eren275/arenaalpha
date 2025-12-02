@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Create an Account — Arena Alpha</title>
+    <link rel="stylesheet" href="sign.css">
+</head>
+
+<body>
+
+    <div class="auth-wrap">
+
+        <!-- Hero / Info Section -->
+        <div class="auth-hero">
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="logo" /></a>
+            </div>
+            <h1>Join Arena Alpha Now</h1>
+            <p>Create a new account to access exclusive deals, game top-ups, and account purchases securely and easily.
+            </p>
+        </div>
+
+        <!-- Sign-Up Form Section -->
+        <div class="auth-card" role="main" aria-labelledby="signupTitle">
+            <div class="title">
+                <h2 id="signupTitle">Create Your Account</h2>
+            </div>
+
+            <form id="signupForm" method="POST" action="api/signup.php">
+                <div class="form-row">
+                    <label for="su-name">Full Name</label>
+                    <input id="su-name" name="fullname" class="input" type="text" placeholder="Enter your full name"
+                        required>
+                </div>
+
+                <div class="form-row">
+                    <label for="su-email">Email</label>
+                    <input id="su-email" name="email" class="input" type="email" placeholder="name@example.com"
+                        required>
+                </div>
+
+                <div class="form-row password-wrap">
+                    <label for="su-password">Password</label>
+                    <input id="su-password" name="password" class="input" type="password" placeholder="Enter password"
+                        required>
+                    <button type="button" class="show-password-btn"
+                        onclick="togglePassword(event, 'su-password')">Show</button>
+                </div>
+
+                <div class="form-row password-wrap">
+                    <label for="su-password2">Confirm Password</label>
+                    <input id="su-password2" name="password2" class="input" type="password"
+                        placeholder="Confirm password" required>
+                    <button type="button" class="show-password-btn"
+                        onclick="togglePassword(event, 'su-password2')">Show</button>
+                </div>
+
+                <div id="su-msg" class="info-msg" aria-live="polite"></div>
+
+                <button type="submit" class="primary-btn">Create Account</button>
+            </form>
+            <br>
+            <div class="helper">
+                <p>Already have an account? <a href="signin.html">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    </script>
+</body>
+
+</html>
